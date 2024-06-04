@@ -1,66 +1,41 @@
-//require('dotenv').config();
+//const API_KEY = process.env.CONSUMER_KEY;
+const form = document.getElementById("myForm");
 
-//const apikey = process.env.CONSUMER_KEY;
+form.addEventListener("submit", function (event) {
+  const location = form[0].value;
 
-// Use Geolocation to estimate where the user is and find the events based on that
-function getLocation() {
-  if (navigator.geolocation) {
-    // if successfull, call the showPosition function. Otherwise, call the showError function
-    navigator.geolocation.getCurrentPosition(showPosition, showError);
-  } else {
-    var x = document.getElementById("location")
-    x.innerHTML = "Unfortunately, we're unable to find your location since Geolocation is not supported by this browser";
-  }
-}
-
-function showError(error) {
-  switch(error.code) {
-    case error.PERMISSION_DENIED:
-      x.innerHTML = "User denied the request for accessing their location.";
-      break;
-    case error.POSITION_UNAVAILABLE:
-      x.innerHTML = "Information for this location is not avaliable.";
-      break;
-    case error.TIMEOUT:
-      x.innerHTML = "The request to find the location timed out.";
-      break;
-    case error.UNKNOWN_ERROR:
-      x.innerHTML = "An unknown error has occurred.";
-      break;
-  }
-}
-
-function showPosition(position) {
-  var x = document.getElementById("location");
-  x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
-  var latlon = position.coords.latitude + "," + position.coords.longitude;
-
-
-  $.ajax ( {
-    type:"GET",
-    // Put API key here
-    url:"https://app.ticketmaster.com/discovery/v2/events.json?apikey=key&latlong=" + latlon,
+  // Make an asyncronous GET request to the Ticketmaster API
+  $.ajax({
+    type: "GET",
+    url:
+    // Filter by music events in the US
+      "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&classificationName=music&city=" +
+      location +
+      "&apikey=" + API_KEY,
     async: true,
     dataType: "json",
     success: function (json) {
-      console.log(json);
+      console.log(json); // for debugging purposes
       var e = document.getElementById("events");
-      e.innerHTML = json.page.totalElements + " events found.";
-      showEvents(json);
-      initMap(position, json);
+      if (e) {
+        e.innerHTML = json.page.totalElements + " events found.";
+        for (var i = 0; i < json.page.size; i++) {
+        $("events").append(
+          "<p>" + json._embedded.events[i].name + "</p>"
+          );
+        }
+      } else {
+        console.error("No element with id 'events' found.");
+      }
     },
-    error: function(xhr, status, err) {
-      console.log(err)
-    }
+    error: function (xhr, status, err) {
+      console.log(err);
+      console.error("Failed to fetch data from Ticketmaster API.");
+    },
   });
-}
+  event.preventDefault();
+});
 
-
-function showEvents(json) {
-  for (var i = 0; i < json.page.size; i++) {
-    $("events").append("<p>"+json._embedded.events[i].name+"</p>");
-  }
-}
-
-getLocation()
-showEvents()
+// Preferred not to use latlong to search for events because it might not be supported in future releases.
+// Can filter by radius or by city so no need to use google map's api i just need to get the user's entered string and pass that into the URL
+// once i have a list of events, get event details through attractions like name, city/country, image, genre, start time, date, TimeZone, Price Range
