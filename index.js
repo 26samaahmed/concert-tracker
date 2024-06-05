@@ -1,6 +1,4 @@
-//const API_KEY = process.env.CONSUMER_KEY;
 const form = document.getElementById("myForm");
-
 form.addEventListener("submit", function (event) {
   const location = form[0].value;
 
@@ -8,10 +6,10 @@ form.addEventListener("submit", function (event) {
   $.ajax({
     type: "GET",
     url:
-    // Filter by music events in the US
+    // Filter by music events in the US (make sure to properly add the api key to the URL)
       "https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&classificationName=music&city=" +
       location +
-      "&apikey=" + API_KEY,
+      "&apikey=" + CONSUMER_KEY,
     async: true,
     dataType: "json",
     success: function (json) {
@@ -20,9 +18,7 @@ form.addEventListener("submit", function (event) {
       if (e) {
         e.innerHTML = json.page.totalElements + " events found.";
         for (var i = 0; i < json.page.size; i++) {
-        $("events").append(
-          "<p>" + json._embedded.events[i].name + "</p>"
-          );
+          $("#events").append("<p>" + json._embedded.events[i].name + "</p>");
         }
       } else {
         console.error("No element with id 'events' found.");
