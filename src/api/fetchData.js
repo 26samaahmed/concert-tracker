@@ -1,7 +1,8 @@
-function fetchData() {
+export function fetchData() {
   const form = document.getElementById("myForm");
   form.addEventListener("submit", function (event) {
     const location = form[0].value;
+    let eventsArray = [];
 
     // Make an asyncronous GET request to the Ticketmaster API
     $.ajax({
@@ -21,20 +22,20 @@ function fetchData() {
           e.innerHTML = json.page.totalElements + " events found.";
           console.log("Page size: " + json.page.size);
           for (var i = 0; i < 5; i++) {
-            $("#events").append(
-              "<div class='event'>" +
-                "<img src='" + json._embedded.events[i].images[0].url + "' alt='Event Image' width='230' height='130'>" +
-                "<p>" + json._embedded.events[i].name + "</p>" +
-                "<p>Artist: " + json._embedded.events[i]._embedded.attractions[0].name + "</p>" +
-                "<p>Date: " + json._embedded.events[i].dates.start.localDate + "</p>" +
-                "<p>Time: " + json._embedded.events[i].dates.start.localTime + "</p>" +
-                "<p>Genre: " + json._embedded.events[i].classifications[0].genre.name + "</p>" + // Genre is for filtering events later on
-                //"<p>Price Range: $" + json._embedded.events[i].priceRanges[0].min + " - $" + json._embedded.events[i].priceRanges[0].max + "</p>" +
-                "<p>Venue: " + json._embedded.events[i]._embedded.venues[0].name + "</p>" +
-                "<p><a href='" + json._embedded.events[i].url + "' target='_blank'>View Seating</a></p>" +
-              "</div>"
-            );
-            
+          // Instead of appending the data to a div, i want to append it to an array that can returned so that i'm able to use it in the svelte component
+            eventsArray.push({
+              image: json._embedded.events[i].images[0].url,
+              name: json._embedded.events[i].name,
+              artist: json._embedded.events[i]._embedded.attractions[0].name,
+              date: json._embedded.events[i].dates.start.localDate,
+              time: json._embedded.events[i].dates.start.localTime,
+              genre: json._embedded.events[i].classifications[0].genre.name,
+              venue: json._embedded.events[i]._embedded.venues[0].name,
+              url: json._embedded.events[i].url,
+              id: i
+            });
+            // for debugging purposes
+            console.log("Event " + i + ": " + eventsArray[i].name);
           }
         } else {
           console.error("No element with id 'events' found.");
@@ -47,4 +48,12 @@ function fetchData() {
     });
     event.preventDefault();
   });
+  
+  // return the event data so that i can use in the svelte component
+  return eventsArray;
 }
+
+console.log(fetchData());
+
+// since the function above is async, it's returing a promise which means i would have to use .then() to get the data
+// maybe i should also add a loading spinner to the svelte component while the data is being fetched

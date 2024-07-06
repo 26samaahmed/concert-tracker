@@ -9,7 +9,7 @@
 		background-color: rgba(255, 255, 255, 0.46);
 		padding: 2rem;
 		border-radius: 20px;
-		color: white;
+    margin: 10px;
   }
   
   .card:hover {
