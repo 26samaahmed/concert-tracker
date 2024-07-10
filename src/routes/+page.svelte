@@ -1,7 +1,5 @@
 <script>
-  import Events from "../components/Events.Svelte";
-  import {writable} from "svelte/store";
-  let loading = writable(true);
+  import { fetchData } from "../api/fetchData";
 </script>
 <svelte:head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
@@ -10,10 +8,11 @@
 
 
 <main>
-  <form id="myForm" method="POST"></form>
+  <form id="myForm" method="POST">
     <input placeholder="Enter City" type="text" id="location"/><br>
-    <input type="submit" value="submit" />
+    <input on:click={fetchData} type="submit" value="submit"/>
+    <div id="events"></div>
   </form>
-  
-  <div class="events" use:loader={loading}></div>
 </main>
+
+<!--TODO: Figure out how to trigger the events component whenever the user clicks submit-->

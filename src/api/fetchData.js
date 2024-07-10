@@ -1,4 +1,4 @@
-export function fetchData() {
+export async function fetchData() {
   const form = document.getElementById("myForm");
   form.addEventListener("submit", function (event) {
     const location = form[0].value;
@@ -17,12 +17,11 @@ export function fetchData() {
       dataType: "json",
       success: function (json) {
         console.log(json); // for debugging purposes
-        var e = document.getElementById("events");
-        if (e) {
-          e.innerHTML = json.page.totalElements + " events found.";
-          console.log("Page size: " + json.page.size);
+        //var e = document.getElementById("events"); // there is a problem here because i no longer have the events div
+        //if (e) {
+          //e.innerHTML = json.page.totalElements + " events found.";
+          // console.log("Page size: " + json.page.size);
           for (var i = 0; i < 5; i++) {
-          // Instead of appending the data to a div, i want to append it to an array that can returned so that i'm able to use it in the svelte component
             eventsArray.push({
               image: json._embedded.events[i].images[0].url,
               name: json._embedded.events[i].name,
@@ -37,9 +36,9 @@ export function fetchData() {
             // for debugging purposes
             console.log("Event " + i + ": " + eventsArray[i].name);
           }
-        } else {
+       // } else {
           console.error("No element with id 'events' found.");
-        }
+       // }
       },
       error: function (xhr, status, err) {
         console.log(err);
@@ -52,8 +51,6 @@ export function fetchData() {
   // return the event data so that i can use in the svelte component
   return eventsArray;
 }
-
-console.log(fetchData());
 
 // since the function above is async, it's returing a promise which means i would have to use .then() to get the data
 // maybe i should also add a loading spinner to the svelte component while the data is being fetched
