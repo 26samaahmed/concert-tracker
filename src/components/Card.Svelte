@@ -6,13 +6,20 @@
 <style>
   .card {
 		max-width: 280px;
-		background-color: rgba(255, 255, 255, 0.46);
+		background-color: rgb(255, 255, 255, 0.5);
 		padding: 2rem;
-		border-radius: 20px;
     margin: 10px;
+    color: white;
+    border-image: linear-gradient(to right, rgb(0, 178, 255) 0%, rgb(173, 0, 255) 100%) 1;
+    border-width: 4px;
+    border-style: solid;
+    display: grid;
+    grid-column: 3;
   }
   
+
   .card:hover {
-    background-color: rgba(255, 255, 255, 0.6);
+    border: 2px solid rgb(0, 178, 255);
   }
+
 </style>

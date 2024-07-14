@@ -6,6 +6,7 @@
   import { onMount } from "svelte";
 
   let events = [];
+
   onMount(async () => {
     try {
       events = await fetchData(location);
@@ -16,16 +17,13 @@
 
 </script>
 
-<div>
-  {#each events as event}
-    <Card>
-      <h2>{event.name}</h2>
-      <h2>{event.artist}</h2>
-      <h2>{event.date}</h2>
-      <h2>{event.time}</h2>
-      <h2>{event.genre}</h2>
-      <h2>{event.venue}</h2>
-      <a href={event.url}>View Seatings</a>
-    </Card>
-  {/each}
-</div>
+{#each events as event}
+  <Card>
+    <h2>{event.name}</h2>
+    <p>Artist: {event.artist}</p>
+    <p>Date: {event.date} at {event.time}</p>
+    <p>Genre: {event.genre}</p>
+    <p>Venue: {event.venue}</p>
+    <a href={event.url} target="_blank">View Seatings</a>
+  </Card>
+{/each}

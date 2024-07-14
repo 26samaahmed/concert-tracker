@@ -1,7 +1,7 @@
 export async function fetchData(location) {
   let eventsArray = [];
   try {
-    const response = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&classificationName=music&city=${location}&apikey=${apiKey}`);
+    const response = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&classificationName=music&city=${location}&apikey=${key}`);
 
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
@@ -10,7 +10,7 @@ export async function fetchData(location) {
     const json = await response.json();
     //console.log(json);
 
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 10; i++) {
       eventsArray.push({
         image: json._embedded.events[i].images[0].url,
         name: json._embedded.events[i].name,
@@ -32,3 +32,6 @@ export async function fetchData(location) {
     return eventsArray; // return empty array if error
   }
 }
+
+
+// TODO: Add a function that converts military time to standard time and also retrieves the day of the week
