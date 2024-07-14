@@ -1,17 +1,19 @@
-<!-- Implement the logic of fetching the events from the api-->
 <script>
+  export let location = "";
+  
   import Card from "./Card.svelte";
   import fetchData from "../api/fetchData.js";
-  let events = new fetchData();
+  import { onMount } from "svelte";
+
+  let events = [];
+  onMount(async () => {
+    events = await fetchData(location);
+  });
 </script>
 
-<!--The design of each card from the events with the details of the concert-->
-{#await fetchData()}
-  <p>Loading ...</p>
-{:then events}
+<div>
   {#each events as event}
     <Card>
-      <!--<img src={event.image} alt="Concert Image" />-->
       <h2>{event.name}</h2>
       <h2>{event.artist}</h2>
       <h2>{event.date}</h2>
@@ -21,6 +23,4 @@
       <a href={event.url}>View Seatings</a>
     </Card>
   {/each}
-{:catch error}
-	<p style="color: red">A problem occured while fetching the events. Please try again in a few minutes!</p>
-{/await}
+</div>
