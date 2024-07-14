@@ -10,12 +10,11 @@
 </script>
 
 <svelte:head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <title> Concert Tracker </title>
 </svelte:head>
 
 <main>
-  <form id="myForm" on:submit={getEvents}>
+  <form on:submit={getEvents}>
     <input placeholder="Enter City" type="text" bind:value={location} required/><br>
     <input type="submit" value="submit"/>
   </form>
@@ -25,5 +24,3 @@
     <Events {location}/>
   {/if}
 </main>
-
-<!--TODO: Figure out how to trigger the events component whenever the user clicks submit-->

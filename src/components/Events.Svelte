@@ -1,14 +1,19 @@
 <script>
   export let location = "";
-  
+
   import Card from "./Card.svelte";
-  import fetchData from "../api/fetchData.js";
+  import { fetchData } from "../api/fetchData.js";
   import { onMount } from "svelte";
 
   let events = [];
   onMount(async () => {
-    events = await fetchData(location);
+    try {
+      events = await fetchData(location);
+    } catch (error) {
+      console.error(error);
+    }
   });
+
 </script>
 
 <div>
