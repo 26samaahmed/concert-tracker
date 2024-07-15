@@ -9,8 +9,8 @@ export async function fetchData(location) {
 
     const json = await response.json();
     //console.log(json);
-
-    for (var i = 0; i < 10; i++) {
+    //console.log(json.pages.size)
+    for (var i = 0; i < 100; i++) {
       eventsArray.push({
         image: json._embedded.events[i].images[0].url,
         name: json._embedded.events[i].name,
