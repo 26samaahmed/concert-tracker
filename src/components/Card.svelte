@@ -11,10 +11,10 @@
     margin: 10px;
     color: white;
     border-radius: 7px;
+    border:2px solid rgb(247, 223, 252);
   }
 
   .card:hover {
-    border: 2px solid rgb(0, 178, 255);
+    border: 2px solid rgb(0, 0, 0);
   }
-
 </style>

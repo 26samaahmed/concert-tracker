@@ -23,8 +23,8 @@
   <form on:submit={getEvents}>
     <div style="display: inline-block;">
       <input placeholder="Enter City" type="text" bind:value={location} required/>
-      <input placeholder="Enter Artist" type="text" bind:value={artist} />
-      <input placeholder="Enter Genre" type="text" bind:value={genre} /><br>
+      <input placeholder="Filter by Artist" type="text" bind:value={artist} />
+      <input placeholder="Filter by  Genre" type="text" bind:value={genre} /><br>
     </div>
     <input type="submit" value="Submit"/>
 
@@ -39,7 +39,6 @@
 
   <!--If the user hits enter then show the events-->
   {#if showEvents}
-    <p style="color: white; font-size: 1.5rem">Concerts in {location}</p>
     <Events {location}/>
   {/if}
 </main>

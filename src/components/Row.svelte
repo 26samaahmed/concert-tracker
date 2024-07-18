@@ -1,8 +1,6 @@
 <!--Used to create a new row for every 3 events-->
 <div class="row">
-  <slot></slot>
-  <slot></slot>
-  <slot></slot>
+  <slot>Event 1</slot>
 </div>
 
 <style>
