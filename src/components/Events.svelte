@@ -29,7 +29,8 @@
       <Row>
         <!-- First Event in the Row -->
         <Card>
-          <h2>{event.name}</h2>
+          <img src={event.image} alt={event.name} />
+          <p>{event.name}</p>
           <p>Artist: {event.artist}</p>
           <p>Date: {convertDate(event.date)} at {convertTime(event.time)}</p>
           <p>Genre: {event.genre}</p>
@@ -40,7 +41,8 @@
         <!-- Second Event in the Row -->
         {#if events[i + 1]}
           <Card>
-            <h2>{events[i + 1].name}</h2>
+            <img src={events[i + 1].image} alt={events[i + 1].name} />
+            <p>{events[i + 1].name}</p>
             <p>Artist: {events[i + 1].artist}</p>
             <p>Date: {convertDate(events[i + 1].date)} at {convertTime(events[i + 1].time)}</p>
             <p>Genre: {events[i + 1].genre}</p>
@@ -52,7 +54,8 @@
         <!-- Third Event in the Row -->
         {#if events[i + 2]}
           <Card>
-            <h2>{events[i + 2].name}</h2>
+            <img src={events[i + 2].image} alt={events[i + 2].name} />
+            <p>{events[i + 2].name}</p>
             <p>Artist: {events[i + 2].artist}</p>
             <p>Date: {convertDate(events[i + 2].date)} at {convertTime(events[i + 2].time)}</p>
             <p>Genre: {events[i + 2].genre}</p>
@@ -66,3 +69,12 @@
     {/if}
   {/each}
 {/if}
+
+<style>
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 3px;
+  }
+</style>
