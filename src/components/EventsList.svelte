@@ -1,7 +1,7 @@
 <script>
   export let location = "";
 
-  import Card from "./Card.svelte";
+  import Card from "./Cards.svelte";
   import { fetchData, convertDate, convertTime } from "../api/fetchData.js";
   import { onMount } from "svelte";
 
