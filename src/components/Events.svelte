@@ -1,7 +1,8 @@
 <script>
   export let location = "";
 
-  import Card from "./Cards.svelte";
+  import Card from "./Card.svelte";
+  import Row from "./Row.svelte";
   import { fetchData, convertDate, convertTime } from "../api/fetchData.js";
   import { onMount } from "svelte";
 
@@ -19,6 +20,7 @@
 </script>
 
 {#each events as event}
+  <!-- If i == 3 then print the row with the 3 events. If i is not 3 then append to the row -->
   <Card>
     <h2>{event.name}</h2>
     <p>Artist: {event.artist}</p>

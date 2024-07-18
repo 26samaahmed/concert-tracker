@@ -20,6 +20,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"bootstrap": "^5.3.3"
+		"bootstrap": "^5.3.3",
+		"dotenv": "^16.4.5"
 	}
 }

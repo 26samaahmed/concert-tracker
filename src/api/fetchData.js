@@ -1,8 +1,9 @@
 export async function fetchData(location) {
+
   let eventsArray = [];
   try {
     // fetch data from Ticketmaster API using the location provided by the user
-    const response = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&classificationName=music&city=${location}&apikey=${apiKey}`);
+    const response = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&classificationName=music&city=${location}&apikey=${CONSUMER_KEY}`);
 
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
