@@ -36,7 +36,7 @@
     </datalist>
     -->
   </form>
-
+  <p style="color: white; font-size: 1.5rem"> hi </p>
   <!--If the user hits enter then show the events-->
   {#if showEvents}
     <Events {location}/>
@@ -100,4 +100,5 @@
     transition-duration: 0.5s;
     color: white;
   }
+
 </style>
