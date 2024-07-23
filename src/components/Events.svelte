@@ -30,11 +30,10 @@
         <!-- First Event in the Row -->
         <Card>
           <img src={event.image} alt={event.name} />
-          <p>{event.name}</p>
-          <p>Artist: {event.artist}</p>
-          <p>Date: {convertDate(event.date)} at {convertTime(event.time)}</p>
-          <p>Genre: {event.genre}</p>
-          <p>Venue: {event.venue}</p>
+          <h4>{event.name}</h4>
+          <p><b>Artist: </b>{event.artist}</p>
+          <p><b>Date: </b>{convertDate(event.date)} at {convertTime(event.time)}</p>
+          <p><b>Venue: </b>{event.venue}</p>
           <a href={event.url} target="_blank">View Seatings</a>
         </Card>
 
@@ -42,11 +41,10 @@
         {#if events[i + 1]}
           <Card>
             <img src={events[i + 1].image} alt={events[i + 1].name} />
-            <p>{events[i + 1].name}</p>
-            <p>Artist: {events[i + 1].artist}</p>
-            <p>Date: {convertDate(events[i + 1].date)} at {convertTime(events[i + 1].time)}</p>
-            <p>Genre: {events[i + 1].genre}</p>
-            <p>Venue: {events[i + 1].venue}</p>
+            <h4>{events[i + 1].name}</h4>
+            <p><b>Artist: </b>{events[i + 1].artist}</p>
+            <p><b>Date: </b>{convertDate(events[i + 1].date)} at {convertTime(events[i + 1].time)}</p>
+            <p><b>Venue: </b>{events[i + 1].venue}</p>
             <a href={events[i + 1].url} target="_blank">View Seatings</a>
           </Card>
         {/if}
@@ -55,11 +53,10 @@
         {#if events[i + 2]}
           <Card>
             <img src={events[i + 2].image} alt={events[i + 2].name} />
-            <p>{events[i + 2].name}</p>
-            <p>Artist: {events[i + 2].artist}</p>
-            <p>Date: {convertDate(events[i + 2].date)} at {convertTime(events[i + 2].time)}</p>
-            <p>Genre: {events[i + 2].genre}</p>
-            <p>Venue: {events[i + 2].venue}</p>
+            <h4>{events[i + 2].name}</h4>
+            <p><b>Artist: </b>{events[i + 2].artist}</p>
+            <p><b>Date: </b>{convertDate(events[i + 2].date)} at {convertTime(events[i + 2].time)}</p>
+            <p><b>Venue: </b>{events[i + 2].venue}</p>
             <a href={events[i + 2].url} target="_blank">View Seatings</a>
           </Card>
         {/if}
@@ -76,5 +73,26 @@
     height: 200px;
     object-fit: cover;
     border-radius: 3px;
+  }
+
+  h4, p {
+    text-align: left;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+    background-color: rgb(0, 10, 25);
+    padding: 0.9rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+    display: inline-block;
+    text-align: center;
+  }
+
+  a:hover {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    transition-duration: 0.25s;
   }
 </style>
