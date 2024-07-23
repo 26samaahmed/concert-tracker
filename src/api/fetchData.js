@@ -1,9 +1,12 @@
+// This file contains functions that fetch data from the Ticketmaster API and convert the date and time to a more readable format.
+const consumerKey = import.meta.env.VITE_CONSUMER_KEY;
+
 export async function fetchData(location) {
 
   let eventsArray = [];
   try {
     // fetch data from Ticketmaster API using the location provided by the user
-    const response = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&classificationName=music&city=${location}&apikey=${CONSUMER_KEY}`);
+    const response = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&classificationName=music&city=${location}&apikey=${consumerKey}`);
 
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
