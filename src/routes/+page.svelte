@@ -36,7 +36,6 @@
     </datalist>
     -->
   </form>
-  <p style="color: white; font-size: 1.5rem"> hi </p>
   <!--If the user hits enter then show the events-->
   {#if showEvents}
     <Events {location}/>
@@ -45,7 +44,7 @@
 
 <style>
   :global(body) {
-    background-color:rgb(0, 15, 38);
+    background-color:rgb(0, 10, 25);
   }
 
   main {
@@ -102,3 +101,7 @@
   }
 
 </style>
+
+<!--TODO: Sort the events by closest day.
+    TODO: Sort by year because for a city like LA, there's 1000+ concerts
+    TODO: Adjust how many events show per page-->

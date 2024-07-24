@@ -4,6 +4,7 @@ const consumerKey = import.meta.env.VITE_CONSUMER_KEY;
 export async function fetchData(location) {
 
   let eventsArray = [];
+  let eventsCount = 0;
   try {
     // fetch data from Ticketmaster API using the location provided by the user
     const response = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&classificationName=music&city=${location}&apikey=${consumerKey}`);
@@ -16,7 +17,9 @@ export async function fetchData(location) {
     //console.log(json);
     //console.log(json.pages.size)
     // Parse the JSON data and store it in an array of objects with each event's details
-    for (var i = 0; i < 100; i++) {
+    eventsCount = json.page.totalElements;
+    console.log("Number of events: " + eventsCount);
+    for (var i = 0; i < 20; i++) {
       eventsArray.push({
         image: json._embedded.events[i].images[0].url,
         name: json._embedded.events[i].name,
@@ -28,8 +31,9 @@ export async function fetchData(location) {
         url: json._embedded.events[i].url,
         id: i
       });
+      console.log(eventsArray.length)
       // for debugging purposes
-      console.log("Event " + i + ": " + eventsArray[i].name);
+      //console.log("Event " + i + ": " + eventsArray[i].name);
     }
     return eventsArray;
 
