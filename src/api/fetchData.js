@@ -1,6 +1,27 @@
 // This file contains functions that fetch data from the Ticketmaster API and convert the date and time to a more readable format.
 const consumerKey = import.meta.env.VITE_CONSUMER_KEY;
-const order = "date,asc";
+
+// Get the current date
+
+// 2024-07-25T15:00:00Z
+// 2024-07-24T22:34:07Z
+
+// Get the current date and time
+const now = new Date();
+
+const nextDay = new Date(now);
+
+// Set the date to the next day
+nextDay.setDate(now.getDate() + 1);
+
+
+// Set endDateTime to one month from now
+// const endDate = new Date(now);
+// endDate.setMonth(now.getMonth() + 2);
+
+// Convert to ISO format without milliseconds
+const start = nextDay.toISOString().split('.')[0] + 'Z';
+// const endISO = endDate.toISOString().split('.')[0] + 'Z';
 
 export async function fetchData(location) {
 
@@ -9,7 +30,7 @@ export async function fetchData(location) {
   try {
     // fetch data from Ticketmaster API using the location provided by the user
     // sort the events by date in ascending order
-    const response = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?size=50&countryCode=US&classificationName=music&city=${location}&apikey=${consumerKey}`);
+    const response = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?size=50&countryCode=US&classificationName=music&city=${location}&apikey=${consumerKey}&sort=date,asc&startDateTime=2024-07-01T00:00:00Z&endDateTime=2024-07-31T23:59:59Z`);
   
 
     if (!response.ok) {
@@ -22,7 +43,7 @@ export async function fetchData(location) {
     // Parse the JSON data and store it in an array of objects with each event's details
     eventsCount = json.page.totalElements;
     console.log("Number of events: " + eventsCount);
-    for (var i = 0; i < 24; i++) {
+    for (var i = 0; i < 50; i++) {
       eventsArray.push({
         image: json._embedded.events[i].images[0].url,
         name: json._embedded.events[i].name,

@@ -23,8 +23,21 @@
   <form on:submit={getEvents}>
     <div style="display: inline-block;">
       <input placeholder="Enter City" type="text" bind:value={location} required/>
-      <input placeholder="Filter by Artist" type="text" bind:value={artist} />
-      <input placeholder="Filter by  Genre" type="text" bind:value={genre} /><br>
+      <!-- Filer by month using a drop down, starting from the current month till the end of the year-->
+      <!--<label for="month">Choose a month</label>-->
+      <select id="month">
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
     </div>
     <input type="submit" value="Submit"/>
 
@@ -75,8 +88,6 @@
     border: none;
 		background-color: rgb(255, 255, 255, 0.5);
     color: rgb(255, 255, 255);
-    margin-left: 17px;
-    margin-right: 17px;
     margin-bottom: 16px;
   }
 
@@ -100,6 +111,15 @@
     color: white;
   }
 
+  #month {
+    padding: 0.7rem;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    border: none;
+    background-color: rgb(255, 255, 255, 0.5);
+    color: rgb(255, 255, 255);
+    margin-left: 16px;
+  }
 </style>
 
 <!--TODO: Sort the events by closest day.
