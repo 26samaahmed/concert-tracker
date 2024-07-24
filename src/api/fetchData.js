@@ -1,5 +1,6 @@
 // This file contains functions that fetch data from the Ticketmaster API and convert the date and time to a more readable format.
 const consumerKey = import.meta.env.VITE_CONSUMER_KEY;
+const order = "date,asc";
 
 export async function fetchData(location) {
 
@@ -7,7 +8,9 @@ export async function fetchData(location) {
   let eventsCount = 0;
   try {
     // fetch data from Ticketmaster API using the location provided by the user
-    const response = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&classificationName=music&city=${location}&apikey=${consumerKey}`);
+    // sort the events by date in ascending order
+    const response = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?size=50&countryCode=US&classificationName=music&city=${location}&apikey=${consumerKey}`);
+  
 
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
@@ -19,7 +22,7 @@ export async function fetchData(location) {
     // Parse the JSON data and store it in an array of objects with each event's details
     eventsCount = json.page.totalElements;
     console.log("Number of events: " + eventsCount);
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < 24; i++) {
       eventsArray.push({
         image: json._embedded.events[i].images[0].url,
         name: json._embedded.events[i].name,

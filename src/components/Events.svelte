@@ -19,9 +19,12 @@
 
 </script>
 
-{#if events.length == 0}
-  <p style="color:white; font-size: 1.5rem">No events found in {location}</p>
-{:else}
+<!-- Show loading message until the events are fetched -->
+{#if events == 0}
+  <p style="color: white; font-size: 1.5rem">Loading...</p>
+
+<!-- If there are no events in the location, show a message -->
+{:else if events.length != 0}
   <p style="color: white; font-size: 1.5rem">Concerts in {location}</p>
   {#each events as event, i}
     <!-- Create new Row if i % 3 == 0 -->
@@ -65,6 +68,8 @@
 
     {/if}
   {/each}
+{:else}
+  <p style="color: white; font-size: 1.5rem">No concerts found in {location}</p>
 {/if}
 
 <style>
