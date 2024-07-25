@@ -1,4 +1,5 @@
 // This file contains functions that fetch data from the Ticketmaster API and convert the date and time to a more readable format.
+import moment from 'moment-timezone';
 const consumerKey = import.meta.env.VITE_CONSUMER_KEY;
 
 // Get the current date
@@ -52,6 +53,7 @@ export async function fetchData(location) {
         time: json._embedded.events[i].dates.start.localTime,
         genre: json._embedded.events[i].classifications[0].genre.name,
         venue: json._embedded.events[i]._embedded.venues[0].name,
+        timeZone: json._embedded.events[i].dates.timezone,
         url: json._embedded.events[i].url,
         id: i
       });
@@ -68,9 +70,12 @@ export async function fetchData(location) {
 }
 
 // Converts a date from 'YYYY-MM-DD' to for this format 'Sat Sep 14 2024'
-export function convertDate(stringDate) {
-  let newDate = new Date(stringDate);
-  return newDate.toDateString();
+export function convertDate(stringDate, timeZone) {
+  // Create a new moment object with the date and timezone
+  let newDate = moment.tz(stringDate, timeZone);
+
+  // Format the date to the desired format
+  return newDate.format('ddd MMM DD YYYY');
 }
 
 // Converts time from '18:30:00' to this format '7:30 PM'

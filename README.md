@@ -4,6 +4,7 @@ TODO LIST:
 - [x] Add a view seatings button where the user will be redirected to the ticket master page to show seating options
 - [x] Allow the user to enter a specific city and then display the concenrt based on location.
 - [x] Work on UI using a new framework.
+- [x] Adjust timezones based on user-entered city using momentjs library
 - [ ] List the artist's top song under their event card for people to preview if they don't know the artist.
 - [ ] Future Implementation: Make user choose specific genres and recommend concerts based on that. They will be able to create profiles and record what concerts they have attended so far and future ones they plan to attend. This can be put on a dashboard.
 
@@ -47,4 +48,5 @@ You can preview the production build with `npm run preview`.
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
 
 
+Teck Stack: SvelteKit, Javascript, Ticketmaster API, MomentJS Library
 made with 💚 by sama ahmed

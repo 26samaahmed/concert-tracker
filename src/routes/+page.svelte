@@ -23,6 +23,7 @@
   <form on:submit={getEvents}>
     <div style="display: inline-block;">
       <input placeholder="Enter City" type="text" bind:value={location} required/>
+      
       <!-- Filer by month using a drop down, starting from the current month till the end of the year-->
       <!--<label for="month">Choose a month</label>-->
       <select id="month">
@@ -40,15 +41,8 @@
         <option value="12">December</option>
     </div>
     <input type="submit" value="Submit"/>
-
-    <!-- Slider for budget
-    <input type="range" min="0" max="10000" step="50" value="500" list="tickmarks" />
-    <datalist id="tickmarks">
-      <option value="0" label="$0" />
-      <option value="1000" label="$10000" />
-    </datalist>
-    -->
   </form>
+
   <!--If the user hits enter then show the events-->
   {#if showEvents}
     <Events {location}/>
@@ -89,6 +83,7 @@
 		background-color: rgb(255, 255, 255, 0.5);
     color: rgb(255, 255, 255);
     margin-bottom: 16px;
+    width: 500px;
   }
 
   ::placeholder {

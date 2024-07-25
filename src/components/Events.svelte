@@ -35,7 +35,7 @@
           <img src={event.image} alt={event.name} />
           <h4>{event.name}</h4>
           <p><b>Artist: </b>{event.artist}</p>
-          <p><b>Date: </b>{convertDate(event.date)} at {convertTime(event.time)}</p>
+          <p><b>Date: </b>{convertDate(event.date, event.timeZone)} at {convertTime(event.time)}</p>
           <p><b>Venue: </b>{event.venue}</p>
           <a href={event.url} target="_blank">View Seatings</a>
         </Card>
@@ -46,7 +46,7 @@
             <img src={events[i + 1].image} alt={events[i + 1].name} />
             <h4>{events[i + 1].name}</h4>
             <p><b>Artist: </b>{events[i + 1].artist}</p>
-            <p><b>Date: </b>{convertDate(events[i + 1].date)} at {convertTime(events[i + 1].time)}</p>
+            <p><b>Date: </b>{convertDate(events[i + 1].date, events[i + 1].timeZone)} at {convertTime(events[i + 1].time)}</p>
             <p><b>Venue: </b>{events[i + 1].venue}</p>
             <a href={events[i + 1].url} target="_blank">View Seatings</a>
           </Card>
@@ -58,7 +58,7 @@
             <img src={events[i + 2].image} alt={events[i + 2].name} />
             <h4>{events[i + 2].name}</h4>
             <p><b>Artist: </b>{events[i + 2].artist}</p>
-            <p><b>Date: </b>{convertDate(events[i + 2].date)} at {convertTime(events[i + 2].time)}</p>
+            <p><b>Date: </b>{convertDate(events[i + 2].date, events[i + 1].timeZone)} at {convertTime(events[i + 2].time)}</p>
             <p><b>Venue: </b>{events[i + 2].venue}</p>
             <a href={events[i + 2].url} target="_blank">View Seatings</a>
           </Card>
