@@ -1,5 +1,6 @@
 <script>
   export let location = "";
+  export let month = 0;
 
   import Card from "./Card.svelte";
   import Row from "./Row.svelte";
@@ -11,7 +12,7 @@
   // Call the fetchData function to get the events
   onMount(async () => { // onMount is a lifecycle function that runs when the component is mounted
     try {
-      events = await fetchData(location);
+      events = await fetchData(location, month);
     } catch (error) {
       console.error(error);
     }
@@ -25,7 +26,7 @@
 
 <!-- If there are no events in the location, show a message -->
 {:else if events.length != 0}
-  <p style="color: white; font-size: 1.5rem">Concerts in {location}</p>
+  <p style="color: white; font-size: 1.5rem">Concerts in {location} on {month}</p>
   {#each events as event, i}
     <!-- Create new Row if i % 3 == 0 -->
     {#if i % 3 == 0}

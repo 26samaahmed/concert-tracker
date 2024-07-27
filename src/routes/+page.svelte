@@ -2,9 +2,9 @@
   import Events from "../components/Events.svelte";
   let showEvents = false;
   let location = ""; // This location will be passed to the Events component
-  let artist = "";
-  let genre = "";
+  let month = 0; // This month will be passed to the Events component
 
+  
   function getEvents(event) {
     event.preventDefault(); // Prevent the form from submitting by default
     showEvents = true;
@@ -25,8 +25,8 @@
       <input placeholder="Enter City" type="text" bind:value={location} required/>
       
       <!-- Filer by month using a drop down, starting from the current month till the end of the year-->
-      <!--<label for="month">Choose a month</label>-->
-      <select id="month">
+      <!-- The date passed as the start date is in this format 2024-07-25T15:00:00Z so depending on what month is chosen, convert to digit and pass the digit so the format is like this 2024-{month}-25T15:00:00Z-->
+      <select id="month" bind:value={month}>
         <option value="1">January</option>
         <option value="2">February</option>
         <option value="3">March</option>
@@ -39,6 +39,7 @@
         <option value="10">October</option>
         <option value="11">November</option>
         <option value="12">December</option>
+      </select>
     </div>
     <input type="submit" value="Submit"/>
   </form>
@@ -112,11 +113,7 @@
     font-size: 1.5rem;
     border: none;
     background-color: rgb(255, 255, 255, 0.5);
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     margin-left: 16px;
   }
 </style>
-
-<!--TODO: Sort the events by closest day.
-    TODO: Sort by year because for a city like LA, there's 1000+ concerts
-    TODO: Adjust how many events show per page-->
