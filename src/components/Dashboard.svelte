@@ -1,0 +1,1 @@
+<!--This file will be responsible to storing the events that the user wants to attend on their dashboard. The user will be able to see the events they have saved and remove them from the dashboard.-->

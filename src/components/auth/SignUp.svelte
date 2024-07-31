@@ -1,0 +1,1 @@
+<!--This file is respponsible to allow the user to sign up using their email and password in order to have their own dashboard.-->
