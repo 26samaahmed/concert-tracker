@@ -7,24 +7,26 @@ export async function fetchData(location, month) {
   const order = 'date,asc';
   const eventType = 'music';
   const country = 'US';
-  const eventCount = '50';
+  const eventCount = '20';
   let year = 2024;
 
   // Pass in the month as a parameter to get events for that month
-  const startDate = `${year}-${month}-01T00:00:00Z`;
-  const endDate = `${year}-${month + 1}-01T00:00:00Z`;
+  const startDate = `2024-${month}-01T00:00:00Z`;
+  const endDate = `2024-${month}-31T23:59:59Z`;
 
   // If the month is December, set the end date to the next year
+  /*
   if (month === 12) {
     endDate = `${year + 1}-01-01T00:00:00Z`;
   }
+    */
 
   let eventsArray = [];
   let eventsCount = 0;
   try {
     // fetch data from Ticketmaster API using the location provided by the user
     // sort the events by date in ascending order
-    const response = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?size=50&countryCode=${country}&classificationName=${eventType}&city=${location}&apikey=${consumerKey}&sort=${order}&startDateTime=${startDate}&endDateTime=${endDate}`);
+    const response = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?size=${eventCount}&countryCode=${country}&classificationName=${eventType}&city=${location}&apikey=${consumerKey}&startDateTime=${startDate}&endDateTime=${endDate}`);
   
 
     if (!response.ok) {
@@ -39,7 +41,7 @@ export async function fetchData(location, month) {
     console.log("Number of events: " + eventsCount);
     for (var i = 0; i < 20; i++) {
       eventsArray.push({
-        image: json._embedded.events[i].images[0].url,
+        image: json._embedded.events[i].images[4].url,
         name: json._embedded.events[i].name,
         artist: json._embedded.events[i]._embedded.attractions[0].name,
         date: json._embedded.events[i].dates.start.localDate,

@@ -26,7 +26,7 @@
 
 <!-- If there are no events in the location, show a message -->
 {:else if events.length != 0}
-  <p style="color: white; font-size: 1.5rem">Concerts in {location} on {month}</p>
+  <p style="color: white; font-size: 1.5rem">Concerts in {location} on the {month}</p>
   {#each events as event, i}
     <!-- Create new Row if i % 3 == 0 -->
     {#if i % 3 == 0}

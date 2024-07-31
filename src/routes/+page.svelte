@@ -23,10 +23,7 @@
   <form on:submit={getEvents}>
     <div style="display: inline-block;">
       <input placeholder="Enter City" type="text" bind:value={location} required/>
-      
-      <!-- Filer by month using a drop down, starting from the current month till the end of the year-->
-      <!-- The date passed as the start date is in this format 2024-07-25T15:00:00Z so depending on what month is chosen, convert to digit and pass the digit so the format is like this 2024-{month}-25T15:00:00Z-->
-      <select id="month" bind:value={month}>
+      <select name="month" id="month" bind:value={month}>
         <option value="1">January</option>
         <option value="2">February</option>
         <option value="3">March</option>
@@ -46,7 +43,7 @@
 
   <!--If the user hits enter then show the events-->
   {#if showEvents}
-    <Events {location}/>
+    <Events {location} {month}/>
   {/if}
 </main>
 
