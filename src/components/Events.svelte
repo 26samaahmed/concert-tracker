@@ -28,6 +28,7 @@
 <!-- If there are no events in the location, show a message -->
 {:else if events.length != 0}
   <p style="color: white; font-size: 1.5rem">Concerts in {location} in {months[month - 1]}</p>
+  <p style="color: white; font-size: 1.5rem">There are {events.length} concerts found</p>
   {#each events as event, i}
     <!-- Create new Row if i % 3 == 0 -->
     {#if i % 3 == 0}
@@ -42,7 +43,7 @@
           <a href={event.url} target="_blank">View Seatings</a>
           <!--Add a checkbox for a concert on the list to attend in the future so it can be saved on a dashboard-->
           <input type="checkbox" class="attend" name="attend" value="attend">
-          <label for="attend">Add to Dashboard</label>
+          <label for="attend">Will Attend</label>
         </Card>
 
         <!-- Second Event in the Row -->
@@ -55,7 +56,7 @@
             <p><b>Venue: </b>{events[i + 1].venue}</p>
             <a href={events[i + 1].url} target="_blank">View Seatings</a>
             <input type="checkbox" class="attend" name="attend" value="attend">
-            <label for="attend">Add to Dashboard</label>
+            <label for="attend">Will Attend</label>
           </Card>
         {/if}
 
@@ -69,7 +70,7 @@
             <p><b>Venue: </b>{events[i + 2].venue}</p>
             <a href={events[i + 2].url} target="_blank">View Seatings</a>
             <input type="checkbox" class="attend" name="attend" value="attend">
-            <label for="attend">Add to Dashboard</label>
+            <label for="attend">Will Attend</label>
           </Card>
         {/if}
         
@@ -100,7 +101,7 @@
     padding: 0.9rem;
     border-radius: 5px;
     margin-top: 1rem;
-    display: inline-block;
+    display: block;
     text-align: center;
   }
 
@@ -117,5 +118,6 @@
   label {
     color: white;
     margin-left: 0.5rem;
+    display: inline-block;
   }
 </style>

@@ -7,7 +7,7 @@ export async function fetchData(location, month) {
   const order = 'date,asc';
   const eventType = 'music';
   const country = 'US';
-  const eventCount = '5';
+  const eventCount = '25';
 
   // Pass in the month as a parameter to get events for that month
   const startDate = `2024-${month}-01T00:00:00Z`;
@@ -31,7 +31,7 @@ export async function fetchData(location, month) {
     // Parse the JSON data and store it in an array of objects with each event's details
     eventsCount = json.page.totalElements;
     console.log("Number of events: " + eventsCount);
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < eventsCount; i++) {
       eventsArray.push({
         image: json._embedded.events[i].images[4].url,
         name: json._embedded.events[i].name,
