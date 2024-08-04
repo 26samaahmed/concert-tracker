@@ -2,7 +2,8 @@
   import Events from "../components/Events.svelte";
   let showEvents = false;
   let location = ""; // This location will be passed to the Events component
-  let month = 0; // This month will be passed to the Events component
+  // The default value should be the current month if the user doens't select a month
+  let month = 0;
 
   
   function getEvents(event) {
@@ -45,6 +46,8 @@
 
   <!--If the user hits enter then show the events-->
   {#if showEvents}
+    <!-- Have a reset button if the user wants to enter a new value for city and a different month-->
+    <button id="reset-btn" on:click={() => showEvents = false}>Reset</button>
     <Events {location} {month}/>
   {/if}
 </main>
@@ -115,6 +118,23 @@
     background-color: rgb(255, 255, 255, 0.5);
     color: rgb(0, 0, 0);
     margin-left: 16px;
+  }
+
+  #reset-btn {
+    background-color: white;
+    color: black;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: 2px solid rgb(240, 244, 239);
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+
+  #reset-btn:hover {
+    background-color: rgb(0, 0, 0);
+    transition-duration: 0.5s;
+    color: white;
   }
 
   @media (max-width: 768px) {
