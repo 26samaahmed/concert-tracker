@@ -6,10 +6,10 @@
 <style>
 	.card {
 		max-width: 300px;
-		background-color: rgb(255, 255, 255, 0.5);
+		background-color: rgba(151, 174, 255, 0.7);
 		padding: 2rem;
 		margin: 20px;
-		color: white;
+		color: rgb(0, 0, 0);
 		border-radius: 7px;
 		border: 2px solid rgb(255, 255, 255);
 	}

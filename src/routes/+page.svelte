@@ -19,6 +19,7 @@
 </svelte:head>
 
 <main>
+
   <p id="header">Welcome, search for concerts happening anywhere here</p>
   <form on:submit={getEvents}>
     <div style="display: inline-block;">
@@ -49,7 +50,8 @@
 
 <style>
   :global(body) {
-    background-color:rgb(0, 10, 25);
+    background: rgb(181,118,203);
+    background: radial-gradient(circle, rgba(181,118,203,1) 14%, rgba(70,85,252,1) 73%);
   }
 
   main {
@@ -79,7 +81,7 @@
     font-size: 1.5rem;
     border: none;
 		background-color: rgb(255, 255, 255, 0.5);
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     margin-bottom: 16px;
     width: 500px;
   }
@@ -113,4 +115,5 @@
     color: rgb(0, 0, 0);
     margin-left: 16px;
   }
+
 </style>

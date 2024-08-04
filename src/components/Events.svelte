@@ -4,12 +4,13 @@
 
   import Card from "./Card.svelte";
   import Row from "./Row.svelte";
-  import { fetchData, convertDate, convertTime } from "../api/fetchData.js";
+  import { fetchData, convertDate, convertTime, pages , eventsCount} from "../api/fetchData.js";
   import { onMount } from "svelte";
+
 
   let events = [];
   let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
+  let currentPage = 1;
   // Call the fetchData function to get the events
   onMount(async () => { // onMount is a lifecycle function that runs when the component is mounted
     try {
@@ -21,14 +22,22 @@
 
 </script>
 
+<!--Use pagination to split the events into pages. I exported the var the shows how many pages depending on number of events per location-->
+{#if events.length != 0}
+  {#if events.length > 24} <!-- If there are more than 24 events, show the pagination -->
+    {#each Array(pages) as _, i} 
+      <button on:click={() => currentPage = i + 1}>Page {i + 1}</button>
+    {/each}
+  {/if}
+{/if}
+
 <!-- Show loading message until the events are fetched -->
 {#if events == 0}
   <p style="color: white; font-size: 1.5rem">Loading...</p>
 
 <!-- If there are no events in the location, show a message -->
 {:else if events.length != 0}
-  <p style="color: white; font-size: 1.5rem">Concerts in {location} in {months[month - 1]}</p>
-  <p style="color: white; font-size: 1.5rem">There are {events.length} concerts found</p>
+  <p style="color: white; font-size: 1.5rem">{eventsCount} concerts in {location} on {months[month - 1]}</p>
   {#each events as event, i}
     <!-- Create new Row if i % 3 == 0 -->
     {#if i % 3 == 0}
@@ -97,7 +106,7 @@
   a {
     color: white;
     text-decoration: none;
-    background-color: rgb(0, 10, 25);
+    background-color: rgb(40, 125, 252);
     padding: 0.9rem;
     border-radius: 5px;
     margin-top: 1rem;
@@ -119,5 +128,16 @@
     color: white;
     margin-left: 0.5rem;
     display: inline-block;
+  }
+
+  button {
+    background-color: white;
+    color: black;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: 2px solid rgb(240, 244, 239);
+    cursor: pointer;
+    margin: 0.5rem;
   }
 </style>
