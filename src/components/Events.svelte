@@ -37,7 +37,7 @@
 
 <!-- If there are no events in the location, show a message -->
 {:else if events.length != 0}
-  <p style="color: white; font-size: 1.5rem">{eventsCount} concerts in {location} on {months[month - 1]}</p>
+  <p id="title-details">{eventsCount} concerts in {location} on {months[month - 1]}</p>
   {#each events as event, i}
     <!-- Create new Row if i % 3 == 0 -->
     {#if i % 3 == 0}
@@ -130,6 +130,11 @@
     display: inline-block;
   }
 
+  #title-details {
+    color: white;
+    font-size: 1.5rem;
+  }
+
   button {
     background-color: white;
     color: black;
@@ -139,5 +144,31 @@
     border: 2px solid rgb(240, 244, 239);
     cursor: pointer;
     margin: 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    img {
+      height: 150px;
+    }
+
+    h4 {
+      font-size: 1.2rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+
+    a {
+      padding: 0.5rem;
+    }
+
+    button {
+      font-size: 1rem;
+    }
+
+    #title-details {
+      font-size: 1.2rem;
+    }
   }
 </style>

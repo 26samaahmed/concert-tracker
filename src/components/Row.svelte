@@ -8,4 +8,17 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
   }
+
+  @media (max-width: 768px) {
+    .row {
+      grid-template-columns: 1fr;
+
+    }
+  }
+
+  @media (max-width: 1024px) and (min-width: 769px) {
+    .row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
 </style>

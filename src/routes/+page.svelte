@@ -13,6 +13,7 @@
 
 <svelte:head>
   <title> Concert Tracker </title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
@@ -114,6 +115,16 @@
     background-color: rgb(255, 255, 255, 0.5);
     color: rgb(0, 0, 0);
     margin-left: 16px;
+  }
+
+  @media (max-width: 768px) {
+    input[type="text"] {
+      width: 150px;
+    }
+
+    input[type="submit"] {
+      margin-top: 1rem;
+    }
   }
 
 </style>
