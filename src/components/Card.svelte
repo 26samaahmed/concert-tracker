@@ -11,11 +11,11 @@
 		margin: 20px;
 		color: rgb(0, 0, 0);
 		border-radius: 7px;
-		border: 2px solid rgb(255, 255, 255);
+		border: 3px solid rgba(70,85,252,1);
 	}
 
 	.card:hover {
-		border: 2px solid black;
+		border: 3px solid rgb(0, 15, 180);
 		transition-duration: 0.25s;
 	}
 </style>

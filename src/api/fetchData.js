@@ -9,16 +9,22 @@ export async function fetchData(location, month) {
   const order = 'date,asc';
   const eventType = 'music';
   const country = 'US';
+  const numberOfDays = new Date(2024, month, 0).getDate();
 
-  // Pass in the month as a parameter to get events for that month
-  const startDate = `2024-${month}-02T00:00:00Z`;
-  const endDate = `2024-${month}-31T23:59:59Z`;
+  if (month < 10) {
+    month = "0" + month;
+  }
+  const monthString = month.toString();
+  console.log("Month: " + monthString);
+
+  const startDate = `2024-${monthString}-02T00:00:00Z`;
+  const endDate = `2024-${monthString}-${numberOfDays}T23:59:59Z`;
+  console.log("Start Date: " + startDate);
+  console.log("End Date: " + endDate);
 
   let eventsArray = [];
   try {
     // fetch data from Ticketmaster API using the location provided by the user
-    // sort the events by date in ascending order
-    // I want the size of the page to be however many events there are in that location in that month
     // Each page can only show 24 events, so I need to split them into multiple pages
     const response = await fetch(`https://app.ticketmaster.com/discovery/v2/events.json?&countryCode=${country}&classificationName=${eventType}&city=${location}&apikey=${consumerKey}&startDateTime=${startDate}&endDateTime=${endDate}&sort=${order}&size=24`);
   
@@ -32,9 +38,10 @@ export async function fetchData(location, month) {
     //console.log(json.pages.size)
     // Parse the JSON data and store it in an array of objects with each event's details
     eventsCount = json.page.totalElements;
-    pages = eventsCount / 24;
+    pages = Math.floor(eventsCount / 24);
+    console.log("Number of pages: " + pages);
     console.log("Number of events: " + eventsCount);
-    for (var i = 0; i <= eventsCount; i++) {
+    for (var i = 0; i <= 24; i++) {
       eventsArray.push({
         image: json._embedded.events[i].images[4].url,
         name: json._embedded.events[i].name,
@@ -48,7 +55,7 @@ export async function fetchData(location, month) {
         id: i
       });
       // for debugging purposes
-      //console.log("Event " + i + ": " + eventsArray[i].name);
+      console.log("Event " + i + ": " + eventsArray[i].name);
     }
     console.log("Events Array is: ", eventsArray.length)
     return eventsArray;
