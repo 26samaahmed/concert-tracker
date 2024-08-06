@@ -1,15 +1,23 @@
 TODO LIST:
-- [ ] Create a Page that allows user to sign up/login. This will be implemented using FireBase and JS for the backend.
+
+> Version 1: 
 - [x] Use Ticket Master API to fetch the concert details and display it.
 - [x] Add a view seatings button where the user will be redirected to the ticket master page to show seating options
 - [x] Allow the user to enter a specific city and then display the concenrt based on location.
 - [x] Work on UI using a new framework.
 - [x] Adjust timezones based on user-entered city using momentjs library + filter events by month
+
+
+https://github.com/user-attachments/assets/9c30755f-b6a5-46db-aa81-fb750c32617c
+
+
+> Version 2:
+- [ ] Create a Page that allows user to sign up/login. This will be implemented using FireBase and JS for the backend.
 - [ ] List the artist's top song under their event card for people to preview if they don't know the artist.
-- [ ] Add a share event link if people want to send it to their friends
 - [ ] Add a turn on notification option to remind users when the event date is closer
 - [ ] Add a dashboard to store events that the user will attend in the future
-- [ ] Future Implementation: Make user choose specific genres and recommend concerts based on that.
+
+
 
 # create-svelte
 
