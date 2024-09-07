@@ -1,6 +1,5 @@
 // This file contains functions that fetch data from the Ticketmaster API and convert the date and time to a more readable format.
 import moment from 'moment-timezone';
-export let pages = 0;
 export let eventsCount = 0;
 
 export async function fetchData(location, month) {
@@ -38,8 +37,6 @@ export async function fetchData(location, month) {
     //console.log(json.pages.size)
     // Parse the JSON data and store it in an array of objects with each event's details
     eventsCount = json.page.totalElements;
-    pages = Math.floor(eventsCount / 24);
-    console.log("Number of pages: " + pages);
     console.log("Number of events: " + eventsCount);
     for (var i = 0; i <= 24; i++) {
       eventsArray.push({

@@ -4,13 +4,15 @@
 
   import Card from "./Card.svelte";
   import Row from "./Row.svelte";
-  import { fetchData, convertDate, convertTime, pages , eventsCount} from "../api/fetchData.js";
+  import { fetchData, convertDate, convertTime, eventsCount} from "../api/fetchData.js";
   import { onMount } from "svelte";
 
 
   let events = [];
   let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  
   let currentPage = 1;
+  let eventsPerPage = 24;
   // Call the fetchData function to get the events
   onMount(async () => { // onMount is a lifecycle function that runs when the component is mounted
     try {
@@ -19,21 +21,28 @@
       console.error(error);
     }
   });
+  $: pageCount = Math.ceil(events.length / eventsPerPage);
 
+  // slice the events array to show only the events for the current page
+  //$: currentEvents = events.slice((currentPage - 1) * eventsPerPage, currentPage * eventsPerPage);
 </script>
-
-<!--Use pagination to split the events into pages. I exported the var the shows how many pages depending on number of events per location-->
-{#if events.length != 0}
-  {#if events.length > 24} <!-- If there are more than 24 events, show the pagination -->
-    {#each Array(pages) as _, i} 
-      <button on:click={() => currentPage = i + 1}>Page {i + 1}</button>
-    {/each}
-  {/if}
-{/if}
 
 <!-- Show loading message until the events are fetched -->
 {#if events == 0}
   <p style="color: white; font-size: 1.5rem">Loading...</p>
+
+<!--Pagination-->
+{#if pageCount > 1}
+  <div style="background-color:white; display:flex; justify-content:center">
+    {#each Array(pageCount) as _, i}
+      <button on:click={() => currentPage = i + 1}
+        class= {currentPage == i + 1 ? "active" : ""}
+        style="background-color: white; color: black; font-size: 1.5rem; padding: 0.5rem 1rem; border-radius: 5px; border: 2px solid rgb(240, 244, 239); cursor: pointer; margin: 0.5rem;">
+        {i + 1}
+      </button>
+    {/each}
+  </div>
+{/if}
 
 <!-- If there are no events in the location, show a message -->
 {:else if events.length != 0}
@@ -91,6 +100,17 @@
   <p style="color: white; font-size: 1.5rem">No concerts found in {location}</p>
 {/if}
 
+<!--Pagination-->
+{#if pageCount > 1}
+  <div style="display: flex; justify-content: center; margin-top: 1rem;">
+    {#each Array(pageCount) as _, i}
+      <button on:click={() => currentPage = i + 1} style="background-color: white; color: black; font-size: 1.5rem; padding: 0.5rem 1rem; border-radius: 5px; border: 2px solid rgb(240, 244, 239); cursor: pointer; margin: 0.5rem;">{i + 1}</button>
+    {/each}
+  </div>
+{/if}
+
+
+
 <style>
   img {
     width: 100%;
@@ -135,6 +155,7 @@
     font-size: 1.5rem;
   }
 
+  /*
   button {
     background-color: white;
     color: black;
@@ -145,6 +166,7 @@
     cursor: pointer;
     margin: 0.5rem;
   }
+    */
 
   @media (max-width: 768px) {
     img {
@@ -163,9 +185,10 @@
       padding: 0.5rem;
     }
 
+    /*
     button {
       font-size: 1rem;
-    }
+    } */
 
     #title-details {
       font-size: 1.2rem;
